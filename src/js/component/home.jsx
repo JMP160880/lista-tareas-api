@@ -21,13 +21,14 @@ const Home = () => {
       method: "GET",
     })
     .then((response) =>response.json())
-    .then((data) =>setArray(data))
+    //.then((data) =>setArray(data))
+	.then((data) =>console.log(data))
     .catch((error) =>console.log(error))     
 	}
 	const devolverLista = () =>{
 		fetch('https://assets.breatheco.de/apis/fake/todos/user/javier', {
       method: "PUT",
-      body:json.stringify(array),
+      body:JSON.stringify(array),
       headers: {
         "Content-Type": "application/json"
       }
@@ -40,7 +41,7 @@ const Home = () => {
 	const nuevoUsario = () =>{
 		fetch('https://assets.breatheco.de/apis/fake/todos/user/javier', {
       method: "POST",
-      body:json.stringify([]),
+      body:JSON.stringify([]),
       headers: {
         "Content-Type": "application/json"
       }
@@ -52,7 +53,7 @@ const Home = () => {
 	const eliminarUsario = () =>{
 		fetch('https://assets.breatheco.de/apis/fake/todos/user/javier', {
       method: "DELETE",
-      body:json.stringify([]),
+      body:JSON.stringify([]),
       headers: {
         "Content-Type": "application/json"
       }
@@ -61,11 +62,11 @@ const Home = () => {
     .then((data) =>console.log(data))
     .catch((error) =>console.log(error))     
 	}
-
 	useEffect(()=>{
 		conectarLista()
-		console.log(array);
+		//nuevoUsario()
 	},[])
+	
 
 
 
