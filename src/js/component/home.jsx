@@ -63,16 +63,13 @@ const Home = () => {
     .catch((error) =>console.log(error))     
 	}
 	useEffect(()=>{
-		conectarLista()
-		//nuevoUsario()
+		conectarLista()	
 	},[])
 	
-
-
-
+	
 	
 	return (
-		<div className="container">
+		<div className="container-sm">
 			<h1>LISTA DE TAREAS PENDIENTES</h1>
 			<ul>
 				<li>
@@ -87,7 +84,11 @@ const Home = () => {
 					</li>
 				))}
 			</ul>
-			<div id="total"> {array.length}  TAREAS POR REALIZAR </div>
+			<div id="total">{array.length}  TAREAS POR REALIZAR </div>
+			<div id="botones" className="d-flex justify-content-sm-center btn btn-secondary btn-sm">
+					<button onClick={nuevoUsario}>NUEVO USUARIO</button>
+					<button onClick={eliminarUsario}>ELIMINAR USUARIO</button>
+				</div>
 		</div>
 	);
 };
