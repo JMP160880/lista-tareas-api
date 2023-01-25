@@ -21,7 +21,7 @@ const Home = () => {
       method: "GET",
     })
     .then((response) =>response.json())
-    //.then((data) =>setArray(data))
+    //.then((data) =>setArray(data))      MIRAR ESTAS LINEAS PARA COMPROBAR
 	.then((data) =>console.log(data))
     .catch((error) =>console.log(error))     
 	}
@@ -63,7 +63,9 @@ const Home = () => {
     .catch((error) =>console.log(error))     
 	}
 	useEffect(()=>{
-		conectarLista()	
+		devolverLista()
+		nuevoUsario()
+		eliminarUsario()
 	},[])
 	
 	
@@ -80,12 +82,12 @@ const Home = () => {
 				{array.map((item,index) => (
 					<li  key={index}>
 						{item} <button onClick={()=>deleteTask(index)}>
-						<i class="fa fa-trash"></i></button>
+						<i className="fa fa-trash"></i></button>
 					</li>
 				))}
 			</ul>
 			<div id="total">{array.length}  TAREAS POR REALIZAR </div>
-			<div id="botones" className="d-flex justify-content-sm-center btn btn-secondary btn-sm">
+			<div id="botones" className="d-flex justify-content-sm-center btn btn-primary btn-sm">
 					<button onClick={nuevoUsario}>NUEVO USUARIO</button>
 					<button onClick={eliminarUsario}>ELIMINAR USUARIO</button>
 				</div>
