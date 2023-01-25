@@ -21,14 +21,13 @@ const Home = () => {
       method: "GET",
     })
     .then((response) =>response.json())
-    //.then((data) =>setArray(data))      MIRAR ESTAS LINEAS PARA COMPROBAR
-	.then((data) =>console.log(data))
+    .then((data) =>setArray(data))
     .catch((error) =>console.log(error))     
 	}
 	const devolverLista = () =>{
 		fetch('https://assets.breatheco.de/apis/fake/todos/user/javier', {
       method: "PUT",
-      body:JSON.stringify(array),
+      body:JSON.stringify(setArray(array.concat(input))),
       headers: {
         "Content-Type": "application/json"
       }
@@ -63,9 +62,8 @@ const Home = () => {
     .catch((error) =>console.log(error))     
 	}
 	useEffect(()=>{
-		devolverLista()
 		nuevoUsario()
-		eliminarUsario()
+		devolverLista()
 	},[])
 	
 	
@@ -87,10 +85,6 @@ const Home = () => {
 				))}
 			</ul>
 			<div id="total">{array.length}  TAREAS POR REALIZAR </div>
-			<div id="botones" className="d-flex justify-content-sm-center btn btn-primary btn-sm">
-					<button onClick={nuevoUsario}>NUEVO USUARIO</button>
-					<button onClick={eliminarUsario}>ELIMINAR USUARIO</button>
-				</div>
 		</div>
 	);
 };
