@@ -7,7 +7,9 @@ const Home = () => {
 
 	const addTask = (e) =>{
 		if(e.keyCode === 13){
-			setArray(array.concat(input));
+			setArray(array.concat({label: input, done: false}));
+			 
+//{label: input, done: false}
 			setInput("")
 		}
 	}
@@ -24,10 +26,10 @@ const Home = () => {
     .then((data) =>setArray(data))
     .catch((error) =>console.log(error))     
 	}
-	const devolverLista = () =>{
+	const devolverListaCubierta = () =>{
 		fetch('https://assets.breatheco.de/apis/fake/todos/user/javier', {
       method: "PUT",
-      body:JSON.stringify(setArray(array.concat(input))),
+      body:JSON.stringify(array),
       headers: {
         "Content-Type": "application/json"
       }
@@ -37,7 +39,7 @@ const Home = () => {
     .then((data) =>console.log(data))
     .catch((error) =>console.log(error))     
 	}
-	const nuevoUsario = () =>{
+	const logarUsario = () =>{
 		fetch('https://assets.breatheco.de/apis/fake/todos/user/javier', {
       method: "POST",
       body:JSON.stringify([]),
@@ -62,10 +64,10 @@ const Home = () => {
     .catch((error) =>console.log(error))     
 	}
 	useEffect(()=>{
-		nuevoUsario()
-		devolverLista()
+		conectarLista()
 	},[])
-	
+
+	console.log(array);
 	
 	
 	return (
@@ -77,12 +79,12 @@ const Home = () => {
 					 placeholder=" - AÑADIR TAREA" 
 					 onKeyDown={addTask}></input>
 				</li>
-				{array.map((item,index) => (
+				{array.length > 0 ? array.map((item,index) => (
 					<li  key={index}>
-						{item} <button onClick={()=>deleteTask(index)}>
+						{item.label} <button onClick={()=>deleteTask(index)}>
 						<i className="fa fa-trash"></i></button>
 					</li>
-				))}
+				)): null}
 			</ul>
 			<div id="total">{array.length}  TAREAS POR REALIZAR </div>
 		</div>
