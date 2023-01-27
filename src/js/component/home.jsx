@@ -8,8 +8,6 @@ const Home = () => {
 	const addTask = (e) =>{
 		if(e.keyCode === 13){
 			setArray(array.concat({label: input, done: false}));
-			 
-//{label: input, done: false}
 			setInput("")
 		}
 	}
@@ -26,7 +24,7 @@ const Home = () => {
     .then((data) =>setArray(data))
     .catch((error) =>console.log(error))     
 	}
-	const devolverListaCubierta = () =>{
+	const guardarListaCubierta = () =>{
 		fetch('https://assets.breatheco.de/apis/fake/todos/user/javier', {
       method: "PUT",
       body:JSON.stringify(array),
@@ -66,8 +64,11 @@ const Home = () => {
 	useEffect(()=>{
 		conectarLista()
 	},[])
+	useEffect(()=>{
+		guardarListaCubierta()
+	},[input])
 
-	console.log(array);
+	
 	
 	
 	return (
