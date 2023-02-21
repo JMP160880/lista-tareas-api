@@ -16,27 +16,7 @@ const Home = () => {
 		let borrar = array[index]
 		setArray(array.filter((item) => item!=borrar))
 	}
-	const conectarLista = () =>{
-		fetch('https://assets.breatheco.de/apis/fake/todos/user/javier', {
-      method: "GET",
-    })
-    .then((response) =>response.json())
-    .then((data) =>setArray(data))
-    .catch((error) =>console.log(error))     
-	}
-	const guardarListaCubierta = () =>{
-		fetch('https://assets.breatheco.de/apis/fake/todos/user/javier', {
-      method: "PUT",
-      body:JSON.stringify(array),
-      headers: {
-        "Content-Type": "application/json"
-      }
-	  
-    })
-    .then((response) =>response.json())
-    .then((data) =>console.log(data))
-    .catch((error) =>console.log(error))     
-	}
+
 	const logarUsario = () =>{
 		fetch('https://assets.breatheco.de/apis/fake/todos/user/javier', {
       method: "POST",
@@ -49,9 +29,32 @@ const Home = () => {
     .then((data) =>console.log(data))
     .catch((error) =>console.log(error))     
 	}
-	const eliminarUsario = () =>{
+
+	const conectarLista = () =>{
 		fetch('https://assets.breatheco.de/apis/fake/todos/user/javier', {
-      method: "DELETE",
+      method: "GET",
+    })
+    .then((response) =>response.json())
+    .then((data) =>setArray(array.concat({label: input, done: false})))
+    .catch((error) =>console.log(error))     
+	}
+	const agregarTarea = () =>{
+		fetch('https://assets.breatheco.de/apis/fake/todos/user/javier', {
+      method: "PUT",
+      body:JSON.stringify(array),
+      headers: {
+        "Content-Type": "application/json"
+      }
+	  
+    })
+    .then((response) =>response.json())
+    .then((data) =>console.log(data))
+    .catch((error) =>console.log(error))     
+	}
+
+	const eliminarTarea = () =>{
+		fetch('https://assets.breatheco.de/apis/fake/todos/user/javier', {
+      method: "PUT",
       body:JSON.stringify([]),
       headers: {
         "Content-Type": "application/json"
@@ -62,11 +65,17 @@ const Home = () => {
     .catch((error) =>console.log(error))     
 	}
 	useEffect(()=>{
+		logarUsario()
+	},[])
+	useEffect(()=>{
 		conectarLista()
 	},[])
 	useEffect(()=>{
-		guardarListaCubierta()
-	},[input])
+		agregarTarea()
+	},[addTask])
+	useEffect(()=>{
+		eliminarTarea()
+	},[deleteTask])
 
 	
 	
